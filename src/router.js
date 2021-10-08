@@ -9,10 +9,12 @@ import Home from "@/views/Home"
 import Login from "@/views/Login"
 import Registration from "@/views/Registration";
 import Protected from "@/views/Protected";
+import Admin from "@/views/Admin";
 
 // Middlewares
 import NonSecureRoute from "@/middlewares/NonSecureRoute";
 import SecureRoute from "@/middlewares/SecureRoute";
+import AdminRoute from "@/middlewares/AdminRouter";
 
 const router = new VueRouter({
     mode: 'history',
@@ -48,6 +50,11 @@ const router = new VueRouter({
                     next({ name: 'Login' })
                 }
             }
+        },
+        {
+            path: '/admin',
+            component: Admin,
+            beforeEnter: AdminRoute
         }
     ]
 })

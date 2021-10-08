@@ -17,6 +17,13 @@ class REST {
         })
     }
 
+    getUsers() {
+        return db.users
+    }
+
+    removeUser(id) {
+        db.users = db.users.filter(user => user.id !== id)
+    }
 }
 
 export default new REST()

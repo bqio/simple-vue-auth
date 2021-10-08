@@ -7,12 +7,19 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        user: JSON.parse(localStorage.getItem('user')) || null
+        user: JSON.parse(localStorage.getItem('user')) || null,
+        users: []
     },
     mutations: {
         setUser(state, user) {
             state.user = user
         },
+        setUsers(state, users) {
+            state.users = users
+        },
+        removeUser(state, id) {
+            state.users = state.users.filter(user => user.id !== id)
+        }
     },
     actions: {
         login({ commit }, formData) {
@@ -47,6 +54,17 @@ const store = new Vuex.Store({
                 REST.createUser(formData)
                 resolve()
             })
+        },
+        getUsers({ commit }) {
+            return new Promise((resolve) => {
+                const users = REST.getUsers()
+                commit('setUsers', users)
+                resolve()
+            })
+        },
+        removeUser({ commit }, id) {
+            REST.removeUser(id)
+            commit('removeUser', id)
         }
     }
 })
