@@ -1,4 +1,5 @@
-# vue-auth
+# simple-vue-auth
+Simple Vue auth system with store, router, protected routing and simple memory db.
 
 ## Project setup
 ```
